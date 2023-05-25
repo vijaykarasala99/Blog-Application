@@ -1,0 +1,160 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Front Application</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+	crossorigin="anonymous">
+<style>
+footer {
+	text-align: center;
+	padding: 5px;
+	background-color: #abbaba;
+	color: #000;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	position: fixed;
+	height: 50px;
+}
+
+.container {
+	width: 40%;
+	padding: 90px;
+	border-radius: 20px;
+	padding-top: 80px;
+	padding-bottom: 10px;
+	border-top: 20px;
+}
+</style>
+</head>
+<body>
+	<div>
+		<nav class="navbar navbar-expand-lg bg-body-tertiary"
+			data-bs-theme="dark" id="lab">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">AshokIT Blog </a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="allposts">All Posts</a></li>
+						<li class="nav-item"><a class="nav-link" href="register">Register</a>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="login">Login</a>
+						</li>
+
+					</ul>
+					<form class="d-flex" role="search">
+						<input class="form-control me-2" type="search"
+							placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success" type="submit">Search</button>
+					</form>
+				</div>
+			</div>
+		</nav>
+
+	</div>
+
+
+
+	<!-- Rendering the blog  -->
+
+	<div style="text-align: left;">
+		<h1 th:text="${display.title}" style="color: blue;"></h1>
+		<p th:utext="${display.content}"></p>
+	</div>
+</body>
+
+
+
+<!-- comments display -->
+
+<div class="container" align="left"></div>
+<div th:each="review: ${reviews}" class="blog-form">
+	<b th:text="${review.name}">Name:</b>
+	<p>
+		<b th:text="${review.createdDate}">Date:</b>
+	</p>
+	<p th:text="${review.comment}"></p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Comment form creation -->
+
+
+<form th:action="@{/comment}" th:object="${comments}" method=post>
+
+	<p th:text="${msg}" class=text-success></p>
+
+
+	<h2 class="bg-primary text-white p-21mb-1" style="color: blue;">Leave
+		a comment</h2>
+
+
+	<table>
+		<tr>
+			<td><input type="text" class="form-control " name="name"
+				placeholder="name" /></td>
+		</tr>
+
+		<tr>
+			<td><input type="text" lass="form-control" name="email"
+				placeholder="email" /></td>
+		</tr>
+
+		<tr>
+			<td><textarea rows="10" cols="50" class="form-control mb-2 "
+					placeholder="comment" name="comment"></textarea></td>
+
+			<td>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</td>
+
+		</tr>
+
+
+
+	</table>
+
+</form>
+
+
+
+<!-- footer -->
+
+
+<div>
+	<footer class="fixed-bottom">
+		<small>Copyright © 2023 Ashok IT . All Rights Reserved.</small>
+	</footer>
+</div>
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"></script>
+
+
+</body>
+</html>
